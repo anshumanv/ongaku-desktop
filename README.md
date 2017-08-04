@@ -7,6 +7,8 @@ Play anime music with ease on your desktop.
 ## Dev
 
 ```
+$ git clone --recursive https://github.com/aviaryan/emojiui.git
+$ cd ongaku-desktop
 $ npm install
 ```
 
