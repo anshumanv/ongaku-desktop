@@ -1,0 +1,45 @@
+{
+  "name": "ongaku-desktop",
+  "version": "1.0.0",
+  "description": "Electron based desktop port of ongaku",
+  "main": "index.js",
+  "bin": {
+    "ongaku": "./index.js"
+  },
+  "scripts": {
+    "test": "standard index.js",
+    "start": "electron .",
+    "build": "electron-packager . --out=dist --asar --overwrite --all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anshuman-Verma/ongaku-desktop.git"
+  },
+  "dependencies": {
+    "electron-debug": "^1.0.0",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {
+    "devtron": "^1.1.0",
+    "electron-packager": "^8.0.0",
+    "electron": "^1.6.6",
+    "standard": "^3.0.0"
+  },
+  "keywords": [
+    "electron",
+    "anime",
+    "music",
+    "ongaku",
+    "opening",
+    "ending",
+    "ost",
+    "desktop",
+    "app"
+  ],
+  "author": "Anshuman Verma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Anshuman-Verma/ongaku-desktop/issues"
+  },
+  "homepage": "https://github.com/Anshuman-Verma/ongaku-desktop#readme"
+}
