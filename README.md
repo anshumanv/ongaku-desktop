@@ -16,7 +16,7 @@ $ ongaku
 ## Dev
 
 ```
-$ git clone --recursive https://github.com/aviaryan/emojiui.git
+$ git clone --recursive https://github.com/Anshuman-Verma/ongaku-desktop.git
 $ cd ongaku-desktop
 $ npm install
 $ npm start
