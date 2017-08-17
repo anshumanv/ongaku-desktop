@@ -4,6 +4,12 @@
 
 Play anime music with ease on your desktop.
 
+### Screenshots
+
+![sample1](https://user-images.githubusercontent.com/21009455/29402408-71be8202-8352-11e7-8464-96a94f049395.PNG)
+![sample2](https://user-images.githubusercontent.com/21009455/29402450-96dd252a-8352-11e7-921c-7e30e3aab1ca.PNG)
+
+
 ## Install and Run
 
 ```

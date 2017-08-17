@@ -1,6 +1,6 @@
 {
   "name": "ongaku-desktop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Electron based desktop port of ongaku",
   "main": "index.js",
   "bin": {
