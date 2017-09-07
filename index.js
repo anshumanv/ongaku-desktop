@@ -26,7 +26,9 @@ function createMainWindow () {
 	win.loadURL(`file://${__dirname}/ongaku/index.html`)
 	win.on('closed', onClosed)
 
-	return win
+	win.on('ready-to-show', () => {
+		return win
+	});
 }
 
 app.on('window-all-closed', () => {
