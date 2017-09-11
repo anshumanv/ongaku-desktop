@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Anshuman-Verma/ongaku-desktop.git"
+    "url": "git+https://github.com/anshumanv/ongaku-desktop.git"
   },
   "dependencies": {
     "electron-debug": "^1.0.0",
@@ -39,7 +39,7 @@
   "author": "Anshuman Verma",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Anshuman-Verma/ongaku-desktop/issues"
+    "url": "https://github.com/anshumanv/ongaku-desktop/issues"
   },
-  "homepage": "https://github.com/Anshuman-Verma/ongaku-desktop#readme"
+  "homepage": "https://github.com/anshumanv/ongaku-desktop#readme"
 }
