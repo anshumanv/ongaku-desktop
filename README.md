@@ -2,7 +2,7 @@
 
 > Electron based desktop port of [ongaku](https://github.com/Anshuman-Verma/ongaku).
 
-Play anime music with ease on your desktop.
+Play anime music with ease on your desktop. Uses [ongaku](https://github.com/anshumanv/ongaku) web-app under the hood.
 
 ### Screenshots
 
