@@ -3,15 +3,14 @@
   "productName": "ongaku",
   "version": "1.0.5",
   "description": "Electron based desktop port of ongaku",
-  "main": "index.js",
+  "main": "app",
   "bin": {
-    "ongaku": "./index.js"
+    "ongaku": "./app/index.js"
   },
   "scripts": {
-    "test": "standard index.js",
-    "start": "electron .",
-    "build": "electron-packager . --out=dist --asar --overwrite --all",
-    "package": "build"
+    "test": "standard app",
+    "start": "electron app",
+    "build": "electron-packager app --out=dist --asar --overwrite --all"
   },
   "repository": {
     "type": "git",
@@ -46,6 +45,6 @@
   },
   "homepage": "https://github.com/anshumanv/ongaku-desktop#readme",
   "build": {
-  	"appId": "com.anshumanv.ongaku"
+    "appId": "com.anshumanv.ongaku"
   }
 }
