@@ -5,7 +5,7 @@
   "description": "Electron based desktop port of ongaku",
   "main": "app",
   "bin": {
-    "ongaku": "./app/index.js"
+    "ongaku": "app"
   },
   "scripts": {
     "test": "standard app",
