@@ -1,11 +1,11 @@
 {
   "name": "ongaku-desktop",
   "productName": "ongaku",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Electron based desktop port of ongaku",
   "main": "app",
   "bin": {
-    "ongaku": "app"
+    "ongaku": ".app/main/index.js"
   },
   "scripts": {
     "test": "standard app",
