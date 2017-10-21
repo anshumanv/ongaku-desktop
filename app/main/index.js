@@ -5,9 +5,6 @@ const electron = require('electron')
 
 const {app, BrowserWindow, globalShortcut, webContents} = electron
 
-// Adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')()
-
 // Prevent window being garbage collected
 let mainWindow
 
