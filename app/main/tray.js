@@ -1,36 +1,59 @@
 const path = require('path')
 const electron = require('electron')
 
-const {app, Menu, Tray} = electron
+const { app, Menu, Tray } = electron
 
-function createTray (onToggle, onClose) {
-	var imageFolder = path.join(__dirname, '../assets/icons/tray')
-	var trayImage
-
-	if(process.platform == 'win32') {
+function createTray (onToggle, onClose, mainWindow) {
+	const imageFolder = path.join(__dirname, '../assets/icons/tray')
+	let trayImage
+	if (process.platform == 'win32') {
 		trayImage = path.join(imageFolder, 'win', 'icon.ico')
-	} else if(process.platform == 'darwin') {
+	} else if (process.platform == 'darwin') {
 		trayImage = path.join(imageFolder, 'osx', 'iconTemplate.png')
 	} else {
 		trayImage = path.join(imageFolder, 'png', 'icon.png')
 	}
 
-	trayIcon = new Tray(trayImage)
-	const contextMenu = Menu.buildFromTemplate([
+	const contextMenu = [
 		{
 			label: 'Toggle Show/Hide',
 			click: onToggle
 		},
 		{
+			type: 'separator'
+		},
+		{
+			label: 'Play/Pause',
+			click() {
+				mainWindow.webContents.executeJavaScript(`
+					webview = document.querySelector('webview');
+					webview.executeJavaScript(\`
+						mus = document.querySelector('#music');
+						if (mus.paused) {
+							mus.play();
+						} else {
+							mus.pause();
+						}
+					\`)
+				`)
+			}
+		},
+		{
+			type: 'separator'
+		},
+		{
 			label: 'Quit',
 			click: onClose
 		}
-	])
+	]
+
+	const trayIcon = new Tray(trayImage)
+
 	trayIcon.on('click', onToggle)
 
 	trayIcon.setTitle('Ongaku')
 	trayIcon.setToolTip('Ongaku')
-	trayIcon.setContextMenu(contextMenu)
+	trayIcon.setContextMenu(Menu.buildFromTemplate(contextMenu))
 
 	return trayIcon
 }
