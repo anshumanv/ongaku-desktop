@@ -39,6 +39,21 @@ function createTray (onToggle, onClose, mainWindow) {
 			}
 		},
 		{
+			label: 'Restart',
+			click() {
+				mainWindow.webContents.executeJavaScript(`
+					webview = document.querySelector('webview');
+					webview.executeJavaScript(\`
+						mus = document.querySelector('#music');
+						mus.currentTime = 0;
+						if (mus.paused) {
+							mus.play();
+						}
+					\`)
+				`)
+			}
+		},
+		{
 			type: 'separator'
 		},
 		{
