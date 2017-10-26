@@ -1,7 +1,7 @@
 const path = require('path')
 const electron = require('electron')
 
-const { app, Menu, Tray } = electron
+const { app, Menu, Tray, ipcMain } = electron
 
 function createTray (onToggle, onClose, mainWindow) {
 	const imageFolder = path.join(__dirname, '../assets/icons/tray')
@@ -67,8 +67,12 @@ function createTray (onToggle, onClose, mainWindow) {
 	trayIcon.on('click', onToggle)
 
 	trayIcon.setTitle('Ongaku')
-	trayIcon.setToolTip('Ongaku')
 	trayIcon.setContextMenu(Menu.buildFromTemplate(contextMenu))
+
+	trayIcon.setToolTip('Loading...')
+	ipcMain.on('songName', (e, msg) => {
+		trayIcon.setToolTip(msg)
+	})
 
 	return trayIcon
 }
