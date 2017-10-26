@@ -1,14 +1,25 @@
 #!/usr/bin/env electron
 
 const path = require('path')
-const electron = require('electron')
-const tray = require('./tray.js')
+const Tray = require('./tray.js')
 
-const {app, BrowserWindow, globalShortcut, webContents} = electron
+const {
+	app,
+	BrowserWindow,
+	globalShortcut,
+	ipcMain,
+	webContents
+} = require('electron')
+
+const {
+	PLAY_SONG,
+	PAUSE_SONG,
+	RESTART_SONG
+} = require('../shared/js/actions/types')
 
 // Prevent window and tray from being garbage collected
 let mainWindow
-let trayIcon
+let tray
 let closing
 
 const mainURL = 'file://' + path.join(__dirname, '../renderer', 'index.html');
@@ -33,7 +44,7 @@ function onClosing (e) {
 function onClosed () {
 	// Dereference the window
 	// For multiple windows store them in an array
-	trayIcon = null
+	tray = null
 	mainWindow = null
 }
 
@@ -65,6 +76,12 @@ function createMainWindow () {
 	return win
 }
 
+ipcMain.on('message', (e, action) => {
+	if (tray) {
+		tray.handleAction(action);
+	}
+});
+
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit()
@@ -80,10 +97,19 @@ app.on('activate', () => {
 app.on('ready', () => {
 	closing = false
 	mainWindow = createMainWindow()
-	trayIcon = tray.create(onTrayToggle, onTrayClose)
+
+	tray = new Tray(onTrayToggle, onTrayClose)
+	tray.on(PLAY_SONG, () => {
+		mainWindow.webContents.send(PLAY_SONG)
+	})
+	tray.on(PAUSE_SONG, () => {
+		mainWindow.webContents.send(PAUSE_SONG)
+	})
+	tray.on(RESTART_SONG, () => {
+		mainWindow.webContents.send(RESTART_SONG)
+	})
 
 	const page = mainWindow.webContents
-
 	page.on('dom-ready', () => {
 		mainWindow.show()
 	})
