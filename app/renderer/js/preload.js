@@ -5,6 +5,31 @@
 
     https://electron.atom.io/docs/api/webview-tag/#preload
  */
+const { ipcRenderer } = require('electron');
+const {
+  PLAY_SONG,
+  PAUSE_SONG,
+  RESTART_SONG
+} = require('../../shared/js/actions/types');
+const {
+  playSong,
+  pauseSong
+} = require('../../shared/js/actions/creators');
+
+ipcRenderer.on(PLAY_SONG, (event) => {
+  document.querySelector('audio').play();
+});
+
+ipcRenderer.on(PAUSE_SONG, (event) => {
+  document.querySelector('audio').pause();
+});
+
+ipcRenderer.on(RESTART_SONG, (event) => {
+  const audio = document.querySelector('audio');
+  audio.currentTime = 0;
+  audio.play();
+});
+
 window.onload = () => {
   const songs = (window.osts || []).concat(window.openings, window.endings);
 
@@ -34,7 +59,10 @@ window.onload = () => {
   const audio = document.querySelector('audio');
 
   // reset current song so play after pause shows notification
-  audio.addEventListener('pause', () => currentSong = '');
+  audio.addEventListener('pause', () => {
+    ipcRenderer.send('message', pauseSong(currentSong));
+    currentSong = '';
+  });
 
   audio.addEventListener('playing', (e)=> {
     let src = e && e.target && e.target.currentSrc;
@@ -42,6 +70,7 @@ window.onload = () => {
     if (songName && songName !== currentSong) {
       currentSong = songName;
       notify('Now playing', songName);
+      ipcRenderer.send('message', playSong(songName));
     }
   });
 };
