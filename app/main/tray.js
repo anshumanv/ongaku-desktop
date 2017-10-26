@@ -1,7 +1,6 @@
 const path = require('path')
-const electron = require('electron')
-
-const { app, Menu, Tray, ipcMain } = electron
+const { app, Menu, Tray, ipcMain } = require('electron')
+const { preferences } = require('../constants')
 
 function createTray (onToggle, onClose, mainWindow) {
 	const imageFolder = path.join(__dirname, '../assets/icons/tray')
@@ -37,26 +36,9 @@ function createTray (onToggle, onClose, mainWindow) {
 		},
 		{
 			label: 'Preferences',
-			submenu: [
-				{
-					label: 'Opening',
-					click() {
-						togglePRF('op')
-					}
-				},
-				{
-					label: 'Ending',
-					click() {
-						togglePRF('ed')
-					}
-				},
-				{
-					label: 'OST',
-					click() {
-						togglePRF('ost')
-					}
-				}
-			]
+			id: 'prf',
+			enabled: false,
+			submenu: []
 		},
 		{
 			type: 'separator'
@@ -98,7 +80,39 @@ function createTray (onToggle, onClose, mainWindow) {
 	trayIcon.on('click', onToggle)
 
 	trayIcon.setTitle('Ongaku')
+
 	trayIcon.setContextMenu(Menu.buildFromTemplate(contextMenu))
+	ipcMain.once('loaded', (e, msg) => {
+		contextMenu.forEach((item, index) => {
+			if (item.id === 'prf') {
+				contextMenu[index].enabled = true
+
+				preferences.forEach((prf) => {
+					contextMenu[index].submenu.push({
+						label: prf.name,
+						id: prf.id,
+						type: 'checkbox',
+						checked: true,
+						click() {
+							togglePRF(prf.id)
+						}
+					})
+
+					ipcMain.on(prf.id, (e, msg) => {
+						contextMenu[index].submenu.forEach((item, idx) => {
+							if (item.id === prf.id) {
+								contextMenu[index].submenu[idx].checked = msg
+							}
+						})
+
+						trayIcon.setContextMenu(Menu.buildFromTemplate(contextMenu))
+					})
+				})
+			}
+		})
+
+		trayIcon.setContextMenu(Menu.buildFromTemplate(contextMenu))
+	})
 
 	trayIcon.setToolTip('Loading...')
 	ipcMain.on('songName', (e, msg) => {
