@@ -14,10 +14,49 @@ function createTray (onToggle, onClose, mainWindow) {
 		trayImage = path.join(imageFolder, 'png', 'icon.png')
 	}
 
+	const execWV = code => (
+		mainWindow.webContents.executeJavaScript(`
+			webview = document.querySelector('webview');
+			webview.executeJavaScript(\`${code}\`);
+		`)
+	)
+
+	const musicFN = code => execWV(`
+		mus = document.querySelector('#music');
+		${code}
+	`)
+
+	const togglePRF = prf => execWV(`
+		$('input.cb-${prf}').click()
+	`)
+
 	const contextMenu = [
 		{
 			label: 'Toggle Show/Hide',
 			click: onToggle
+		},
+		{
+			label: 'Preferences',
+			submenu: [
+				{
+					label: 'Opening',
+					click() {
+						togglePRF('op')
+					}
+				},
+				{
+					label: 'Ending',
+					click() {
+						togglePRF('ed')
+					}
+				},
+				{
+					label: 'OST',
+					click() {
+						togglePRF('ost')
+					}
+				}
+			]
 		},
 		{
 			type: 'separator'
@@ -25,31 +64,23 @@ function createTray (onToggle, onClose, mainWindow) {
 		{
 			label: 'Play/Pause',
 			click() {
-				mainWindow.webContents.executeJavaScript(`
-					webview = document.querySelector('webview');
-					webview.executeJavaScript(\`
-						mus = document.querySelector('#music');
-						if (mus.paused) {
-							mus.play();
-						} else {
-							mus.pause();
-						}
-					\`)
+				musicFN(`
+					if (mus.paused) {
+						mus.play();
+					} else {
+						mus.pause();
+					}
 				`)
 			}
 		},
 		{
 			label: 'Restart',
 			click() {
-				mainWindow.webContents.executeJavaScript(`
-					webview = document.querySelector('webview');
-					webview.executeJavaScript(\`
-						mus = document.querySelector('#music');
-						mus.currentTime = 0;
-						if (mus.paused) {
-							mus.play();
-						}
-					\`)
+				musicFN(`
+					mus.currentTime = 0;
+					if (mus.paused) {
+						mus.play();
+					}
 				`)
 			}
 		},
