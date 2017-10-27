@@ -13,6 +13,8 @@ let closing
 
 const mainURL = 'file://' + path.join(__dirname, '../renderer', 'index.html');
 
+const APP_ICON = path.join(__dirname, '../assets/icons', 'logo.png');
+
 function onTrayToggle(e) {
 		mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
 }
@@ -39,6 +41,8 @@ function onClosed () {
 
 function createMainWindow () {
 	const win = new BrowserWindow({
+		title: 'ongaku',
+		icon: APP_ICON,
 		width: 1280,
 		height: 720,
 		minWidth: 800,
