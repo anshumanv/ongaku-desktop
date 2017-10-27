@@ -80,7 +80,7 @@ app.on('activate', () => {
 app.on('ready', () => {
 	closing = false
 	mainWindow = createMainWindow()
-	trayIcon = tray.create(onTrayToggle, onTrayClose)
+	trayIcon = tray.create(onTrayToggle, onTrayClose, mainWindow)
 
 	const page = mainWindow.webContents
 
