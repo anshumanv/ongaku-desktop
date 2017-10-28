@@ -4,7 +4,13 @@ const path = require('path')
 const electron = require('electron')
 const tray = require('./tray.js')
 
-const {app, BrowserWindow, globalShortcut, webContents} = electron
+const {
+	app,
+	BrowserWindow,
+	globalShortcut,
+	ipcMain,
+	webContents
+} = electron
 
 // Prevent window and tray from being garbage collected
 let mainWindow
@@ -68,6 +74,12 @@ function createMainWindow () {
 	})
 	return win
 }
+
+ipcMain.on('focus', () => {
+	if (mainWindow) {
+		mainWindow.focus()
+	}
+})
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
