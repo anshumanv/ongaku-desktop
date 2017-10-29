@@ -29,7 +29,7 @@ window.onload = () => {
     const options = { body };
     let noti = new Notification(title, options);
     noti.addEventListener('click', () => {
-      window.focus();
+      ipcRenderer.send('focus', true);
     });
   };
 
@@ -66,7 +66,7 @@ window.onload = () => {
     if (songName && songName !== currentSong) {
       currentSong = songName;
 
-      // notify('Now playing', currentSong);
+      notify('Now playing', currentSong);
       updateToolTip(currentSong, 'playing')
     }
   });
