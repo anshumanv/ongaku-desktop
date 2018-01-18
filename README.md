@@ -6,8 +6,8 @@ Play anime music with ease on your desktop. Uses [ongaku](https://github.com/ans
 
 ### Screenshots
 
-![sample1](https://user-images.githubusercontent.com/21009455/29402408-71be8202-8352-11e7-8464-96a94f049395.PNG)
-![sample2](https://user-images.githubusercontent.com/21009455/29402450-96dd252a-8352-11e7-921c-7e30e3aab1ca.PNG)
+![sample1](https://user-images.githubusercontent.com/23422478/35113761-a2094da0-fca8-11e7-8f84-f9b95d3d8276.PNG)
+![sample2](https://user-images.githubusercontent.com/23422478/35113789-b9593a56-fca8-11e7-8ea9-200bf347ec4a.PNG)
 
 
 ## Install and Run
