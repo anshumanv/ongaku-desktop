@@ -3,6 +3,7 @@
 const path = require('path')
 const electron = require('electron')
 const tray = require('./tray.js')
+require('update-electron-app')()
 
 const {
 	app,

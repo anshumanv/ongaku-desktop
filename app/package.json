@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/anshumanv/ongaku-desktop/issues"
   },
-  "homepage": "https://github.com/anshumanv/ongaku-desktop#readme"
+  "homepage": "https://github.com/anshumanv/ongaku-desktop#readme",
+  "dependencies": {
+    "update-electron-app": "1.3.0"
+  }
 }
