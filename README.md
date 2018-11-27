@@ -1,5 +1,7 @@
 # ongaku-desktop [<img src="https://rawgit.com/sindresorhus/awesome-electron/master/electron-logo.svg" align="right" width="100">](https://electron.atom.io/) [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![npm](https://img.shields.io/npm/dt/ongaku-desktop.svg)](https://www.npmjs.com/package/ongaku-desktop) [![npm](https://img.shields.io/npm/v/ongaku-desktop.svg)](https://www.npmjs.com/package/ongaku-desktop) [![SourceForge](https://img.shields.io/sourceforge/dt/ongaku.svg)](https://sourceforge.net/projects/ongaku/)
 
+![Alt text](app/assets/icons/logo.png)
+
 > Electron based desktop port of [ongaku](https://ongaku.js.org).
 
 Play anime music with ease on your desktop. Uses [ongaku](https://github.com/anshumanv/ongaku) web-app under the hood.
